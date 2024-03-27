@@ -1,32 +1,29 @@
 // router.js
 "use strict";
 
-const contentTypes = require('./content-types');
 const utils = require('./utils');
 
 // Listing 7.6 (p. 123-124)
 const httpStatus = require('http-status-codes'),
-
+  contentTypes = require('./content-types'),
   routes = {
-    GET: {
-
-    },
+    GET: {},
     POST: {}
   };
 
 // 라우트에 따른 콜백 함수를 처리하기 위한 함수 handle의 생성
 exports.handle = (req, res) => {
-  try{
+  try {
       routes[req.method][req.url](req, res);
-  } catch(error){
-    console.log("error: ", error);
+    } catch(error) {
+    console.log("error: " + error);
     res.writeHead(httpStatus.OK, contentTypes.html);
-    utils.getFile("view/error.html", res);
+    utils.getFile("views/error.html", res);
   }
 };
 
 // main.js로부터 routes에 등록하기 위한 get 및 post 함수 생성
-exports.get = (url, action) =>{
+exports.get = (url, action) => {
   routes["GET"][url] = action;
 };
 exports.post = (url, action) => {

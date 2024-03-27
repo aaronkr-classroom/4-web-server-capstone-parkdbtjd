@@ -24,7 +24,7 @@ router.get("/contact", (req, res) =>{
     utils.getFile("views/contact.html", res);
 });
 // POST 라우트
-router.post("/contact", (req, res) =>{
+router.post("/thanks", (req, res) =>{
     res.writeHead(httpStatus.OK, contentTypes.html);
     utils.getFile("views/thanks.html", res);
 });
